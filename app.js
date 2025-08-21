@@ -1,49 +1,44 @@
 const express = require('express');
-//
 require("dotenv").config();
-
 
 const app = express();
 const web = require('./routes/web');
-const connectDB = require('./db/connectDB')
-const fileUpload = require('express-fileupload')
-const cookieParser = require('cookie-parser')
-const cors = require('cors')
+const connectDB = require('./db/connectDB');
+const fileUpload = require('express-fileupload');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
-
-
-
-
-
-
-app.use(
-    cors({
-        origin: "https://coursebuking.netlify.app/",
-        credentials: true,
-    })
-);
-
-
-//token get cookie
-app.use(cookieParser())
-
-
-
-//connectDB()
-connectDB()
-app.use(express.json())
-
-//image upload
-app.use(fileUpload({
-    useTempFiles : true,
-    // tempFileDir : '/tmp/'
+// ✅ CORS middleware (put it at very top, before routes)
+app.use(cors({
+    origin: "https://coursebuking.netlify.app", // Your Netlify frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
 }));
 
+// ✅ Body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// app.get('/', (req, res) => {               //routing
-//   res.send('Hello World!')
-// })
+// ✅ Cookie parser
+app.use(cookieParser());
 
+// ✅ Image upload
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/' // safer for Render
+}));
 
-app.use('/api',web); //localhost:3000/api       path
-app.listen(process.env.PORT, console.log('Server start at'+process.env.PORT));
+// ✅ DB Connection
+connectDB();
+
+// ✅ Routes
+app.use('/api', web);
+
+// ✅ Root route for quick testing
+app.get("/", (req, res) => {
+    res.json({ message: "Server running ✅" });
+});
+
+// ✅ Start server
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log(`🚀 Server started on port ${PORT}`));
