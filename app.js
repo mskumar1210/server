@@ -8,7 +8,7 @@ const web = require('./routes/web');
 const connectDB = require('./db/connectDB')
 const fileUpload = require('express-fileupload')
 const cookieParser = require('cookie-parser')
-const cors = require("cors");
+const cors = require('cors')
 
 
 
@@ -18,8 +18,8 @@ const cors = require("cors");
 
 app.use(
     cors({
-        origin: "https://coursebooking1.netlify.app",
-        credentials: true,    // allow credentials (cookies)
+        origin: "https://coursebuking.netlify.app/",
+        credentials: true,
     })
 );
 
