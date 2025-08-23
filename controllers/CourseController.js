@@ -93,4 +93,4 @@ class CourseController {
     }
 }
 
-module.exports = CourseController;
+module.exports = CourseController
