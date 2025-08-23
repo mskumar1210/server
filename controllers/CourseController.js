@@ -2,11 +2,11 @@ const CourseModel = require('../models/course')
 const cloudinary = require('cloudinary')
 
 // Configuration
-cloudinary.config({
-    cloud_name: 'dpnlzmeii',
-    api_key: '312972351377119',
-    api_secret: 'dia-WW1eS90uStkNXo2_jKLfyNA' // Click 'View API Keys' above to copy your API secret
-});
+    cloudinary.config({
+        cloud_name: 'dpnlzmeii',
+        api_key: '312972351377119',
+        api_secret: 'dia-WW1eS90uStkNXo2_jKLfyNA' // Click 'View API Keys' above to copy your API secret
+    });
 
 class CourseController {
 
@@ -27,11 +27,11 @@ class CourseController {
             // console.log(file)
 
             const imageupload = await cloudinary.uploader.upload(file.tempFilePath,{
-                    folder: 'PnInfosys_slider'
-                }
-            )
+                folder: 'PnInfosys_slider'
+            }
+        )
 
-            // console.log(imageupload)
+        // console.log(imageupload)
 
             const data = await CourseModel.create({
                 title,
