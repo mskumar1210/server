@@ -10,7 +10,7 @@ const cors = require('cors');
 
 // ✅ CORS middleware (put it at very top, before routes)
 app.use(cors({
-    origin: "https://coursebuking.netlify.app", // Your Netlify frontend
+    origin: "https://bookingsystem01.netlify.app", // Your Netlify frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
